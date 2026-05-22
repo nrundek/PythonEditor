@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+    <h1>Python editor</h1>
+  <main role="main">
+    <section aria-labelledby="status-naslov" class="panel">
+      <h2 id="status-naslov">System status</h2>
+      <p id="status" role="status" aria-live="polite">Loading Python environment.</p>
+      <p class="note">For more complex code, save the file and run it in the system terminal using the Run_Py_File.bat.</p>
+    </section>
+
+    <section aria-labelledby="upute-naslov" class="panel">
+      <h2 id="upute-naslov">Quick instructions</h2>
+      <details>
+        <summary>Show or hide usage instructions</summary>
+        <ol>
+          <li>In <strong>File name</strong> field enter name of your program.</li>
+          <li>For open existing program, press <strong>Open existing .py file</strong>.</li>
+          <li>Current row and column will be spoken when you press Enter or <strong>Announce position</strong> and when you press shortcut in edit field <strong>Alt+L</strong>.</li>
+          <li>You can enter number of line in <strong>Go to line</strong> field for quick navigation and press <strong>Go</strong> button.</li>
+          <li>Press <strong>Run code</strong>. The program will execute in the browser.</li>
+          <li>If the program uses <code>input()</code>, the browser will open a dialog box for entering values.</li>
+          <li>Result or error description Will be displayed in the <strong>Terminal output</strong> area.</li>
+          <li>The code is checked line by line, so errors will also be displayed in sequence. When one error is fixed and the code is run again, the next error will be shown (if one exists).</li>
+<li><strong>Save file</strong> button save current code such as <code>.py</code> file. 
+          <li>The file will be saved to the default downloads folder. From there, move it to this editor folder if you want to run it using the .bat file in a system terminal with Python installed.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section id="editor" aria-labelledby="editor-naslov" class="panel">
+      <h2 id="editor-naslov">Editor</h2>
+
+      <div class="field-group">
+        <label for="fileName">File name</label>
+        <input id="fileName" name="fileName" type="text" value="my_program.py" autocomplete="off">
+      </div>
+
+      <div class="button-row">
+        <button id="openButton" type="button">Open existing .py file</button>
+        <input id="openFileInput" class="visually-hidden" type="file" accept=".py,text/x-python,text/plain" aria-label="Select a Python file to open">
+      </div>
+
+      <div class="field-group">
+        <p id="exampleCode" class="example-label"><strong>Example code:</strong></p>
+        <pre aria-labelledby="exampleCode"><code>print("Hello everyone!")</code></pre>
+      </div>
+
+      <div class="field-group">
+        <label for="codeInput">Python code</label>
+        <div class="code-editor" role="group" aria-label="multi-line field">
+          <pre id="lineNumbers" class="line-numbers" aria-hidden="true">1</pre>
+          <textarea id="codeInput" name="codeInput" rows="34" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+        </div>
+        <p id="cursorPosition" class="cursor-status"></p>
+
+        <div class="line-tools" role="group" aria-label="line navigation">
+          <button id="announceLineButton" type="button">Announce position</button>
+          <label for="gotoLine">Go to line</label>
+          <input id="gotoLine" name="gotoLine" type="number" min="1" inputmode="numeric" autocomplete="off">
+          <button id="gotoLineButton" type="button">Go</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pokretanje" aria-labelledby="pokretanje-naslov" class="panel">
+      <h2 id="pokretanje-naslov">Program execution</h2>
+      <div class="button-row">
+        <button id="runButton" type="button" disabled>Run code</button>
+        <button id="clearButton" type="button">Clear code</button>
+      </div>
+    </section>
+
+    <section id="rezultat" aria-labelledby="rezultat-naslov" class="panel">
+      <h2 id="rezultat-naslov">Execution result</h2>
+      <p id="resultSummary" role="status" aria-live="polite">Code has not been run yet.</p>
+
+      <div id="errorDetails" class="error-details" hidden></div>
+
+      <label for="outputArea">Terminal output</label>
+      <textarea id="outputArea" rows="50" readonly></textarea>
+      <div class="button-row">
+        <button id="saveButton" type="button">Save file</button>
+      </div>
+
+</section>
+  </main>
+</body>
+</html>
